@@ -30,5 +30,5 @@ public class Note {
     @Column(name = "note_title")
     @Type(type = "text")
     private String title;
-    //abc
+
 }
