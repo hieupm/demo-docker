@@ -4,6 +4,11 @@ pipeline {
         maven 'maven'
     }
     stages {
+        stage('Test') {
+            withEnv(["PATH=$PATH:~/.local/bin"]){
+                    sh "bash test.sh"
+                }
+        }
         stage('Build') {
             steps {
                 sh 'mvn clean package'
