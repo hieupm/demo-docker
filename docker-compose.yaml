@@ -1,17 +1,25 @@
 version: "3.8"
 
+volumes:
+  db:
+
 services:
   mysqldb:
     image: mysql:8.0.30
-    restart: unless-stopped
-    environment:
-      - MYSQL_ROOT_PASSWORD=1234
-      - MYSQL_DATABASE=jenkins
     ports:
-      - "3307:3306" #<local-port>:<container-port>
+      - "3306:3306" #<local-port>:<container-port>
+
+    environment:
+      - MYSQL_DATABASE=jenkins
+      - MYSQL_USER=admin
+      - MYSQL_ROOT_PASSWORD=Iameden321+
+      - MYSQL_PORT=3306
+
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/1.sql
       - db:/var/lib/mysql
+
+    restart: unless-stopped
   app:
     depends_on:
       - mysqldb
@@ -22,9 +30,6 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/jenkins?autoReconnect=true&failOverReadOnly=false&maxReconnects=10
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_DATASOURCE_PASSWORD: Iameden321+
     stdin_open: true
     tty: true
-
-volumes:
-  db:
