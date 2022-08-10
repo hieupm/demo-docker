@@ -21,16 +21,13 @@ services:
       - db:/var/lib/mysql
 
     restart: unless-stopped
-  app:
-    depends_on:
-      - mysqldb
-    image: spring-boot-app
-    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db:mysql
     ports:
-      - "8080:8080" #<local-port>:<container-port>
+      - "9191:80"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/jenkins?autoReconnect=true&failOverReadOnly=false&maxReconnects=10
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: Iameden321+
-    stdin_open: true
-    tty: true
+      PMA_HOST: db
+      PMA_PORT: 3306
