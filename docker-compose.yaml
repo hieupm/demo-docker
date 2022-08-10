@@ -11,9 +11,10 @@ services:
 
     environment:
       - MYSQL_DATABASE=jenkins
-      - MYSQL_USER=admin
-      - MYSQL_ROOT_PASSWORD=Iameden321+
       - MYSQL_PORT=3306
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=Iameden321+
+      - MYSQL_ROOT_PASSWORD=Iameden321+
 
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/1.sql
