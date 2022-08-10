@@ -4,11 +4,6 @@ pipeline {
         maven 'maven'
     }
     stages {
-        stage('Test') {
-            withEnv(["PATH=$PATH:~/.local/bin"]){
-                    sh "bash test.sh"
-                }
-        }
         stage('Build') {
             steps {
                 sh 'mvn clean package'
@@ -21,6 +16,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+            withEnv(["PATH=$PATH:~/.local/bin"]){
+                                sh "bash test.sh"
+                            }
                 sh 'docker-compose -f docker-compose.yml build'
                 sh 'docker-compose -f docker-compose.yml up -d'
             }
