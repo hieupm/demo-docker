@@ -15,9 +15,12 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=Iameden321+
       - MYSQL_ROOT_PASSWORD=Iameden321+
+
     volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/1.sql
       - db:/var/lib/mysql
-    restart: always
+
+    restart: unless-stopped
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
