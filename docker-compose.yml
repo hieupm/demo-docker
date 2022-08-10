@@ -25,9 +25,9 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     links:
-      - db:mysql
+      - mysqldb:mysql
     ports:
       - "9191:80"
     environment:
-      PMA_HOST: db
+      PMA_HOST: mysqldb
       PMA_PORT: 3306
