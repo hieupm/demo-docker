@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'ci-cd' }
+    agent any
     tools {
         maven 'maven'
     }
