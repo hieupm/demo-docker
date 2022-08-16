@@ -34,6 +34,8 @@ public class NoteController {
     @PostMapping()
     public ResponseEntity<Long> persist(@RequestBody Note note) {
         noteRepository.save(note);
-        return ResponseEntity.ok(note.getId());
+
+        return ResponseEntity.ok(999L);
     }
+
 }
