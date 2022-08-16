@@ -13,8 +13,7 @@ services:
     ports:
       - "8000:8080"
     volumes:
-      - type: bind
-        source: /var/log/demo
+      - source: /var/log/demo
         target: /var/log/demo
 
   mysqldb:
