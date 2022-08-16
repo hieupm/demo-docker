@@ -5,17 +5,17 @@ volumes:
 
 services:
   app:
-    container_name: demo-spring-boot
-    image: demo-spring-boot
+    container_name: demo-docker-spring-boot
+    image: demo-docker-spring-boot
     build: ./
     env_file:
       - env/.env.development
     ports:
       - "8000:8080"
     volumes:
-      - type: volume
-        source: /var/log/demo
-        target: /var/log/demo
+      - type: bind
+        source: /var/log/demo-docker
+        target: /var/log/demo-docker
 
   mysqldb:
     image: mysql:8.0.30
