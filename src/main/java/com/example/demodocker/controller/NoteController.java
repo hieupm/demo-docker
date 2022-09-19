@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping(value = "/note")
@@ -36,6 +39,19 @@ public class NoteController {
         noteRepository.save(note);
 
         return ResponseEntity.ok(999L);
+    }
+
+    public static void main(String[] args) {
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.schedule(() -> {
+            System.out.println("Hello World 1 " + Thread.currentThread().getName());
+        }, 1000, TimeUnit.MILLISECONDS);
+        executor.schedule(() -> {
+            System.out.println("Hello World 2 " + Thread.currentThread().getName());
+        }, 1000, TimeUnit.MILLISECONDS);
+        executor.schedule(() -> {
+            System.out.println("Hello World 3 " + Thread.currentThread().getName());
+        }, 1000, TimeUnit.MILLISECONDS);
     }
 
 }
