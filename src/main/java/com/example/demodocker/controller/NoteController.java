@@ -2,14 +2,10 @@ package com.example.demodocker.controller;
 
 import com.example.demodocker.entities.Note;
 import com.example.demodocker.repo.NoteRepository;
+import com.example.demodocker.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,22 +14,26 @@ import java.util.List;
 public class NoteController {
 
     @Autowired
-    private NoteRepository noteRepository;
+    private NoteService noteService;
 
     @GetMapping
     public ResponseEntity<List<Note>> getNotes() {
         System.out.println("Note list: ");
-        return ResponseEntity.ok(noteRepository.findAll());
+        return ResponseEntity.ok(noteService.listAll());
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Note> getNoteById(@PathVariable(value = "id") long noteId) {
-        return ResponseEntity.ok(noteRepository.getOne(noteId));
+    @GetMapping("/getOne")
+    public ResponseEntity<Note> getNoteById(@RequestParam(value = "id") String id) {
+        return ResponseEntity.ok(noteService.getNoteByBookId(id));
     }
 
-    @PostMapping()
-    public ResponseEntity<Long> persist(@RequestBody Note note) {
-        noteRepository.save(note);
+    @PostMapping("/insert")
+    public ResponseEntity<Long> insert(@RequestBody Note note) {
+        noteService.insert(note);
         return ResponseEntity.ok(note.getId());
+    }
+
+    public static void main(String[] args) {
+
     }
 }
