@@ -9,4 +9,5 @@ public interface BookService {
 
     List<Book> listAll();
 
+    void updateAuthor(Long id);
 }

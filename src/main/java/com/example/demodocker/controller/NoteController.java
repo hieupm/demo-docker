@@ -33,7 +33,4 @@ public class NoteController {
         return ResponseEntity.ok(note.getId());
     }
 
-    public static void main(String[] args) {
-
-    }
 }

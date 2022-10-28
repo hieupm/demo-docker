@@ -6,9 +6,11 @@ import com.example.demodocker.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class BookServiceImpl implements BookService {
 
     @Autowired
@@ -21,9 +23,25 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> listAll() {
-        List<Book> books = bookRepository.getAllBooks();
-        Book book = books.get(0);
-        book.getNotes();
         return bookRepository.findAll();
     }
+
+    @Override
+    public void updateAuthor(Long id) {
+        bookRepository.updateAuthor(id);
+    }
+
+    public static void main(String[] args) {
+        Book book = Book.builder()
+                .name("Test")
+                .build();
+
+        Book.BookBuilder bookBuilder = book.toBuilder();
+        Book newBook = bookBuilder
+                .name("Demo")
+                .authorName("HieuPM")
+                .build();
+        System.out.println(newBook.toString());
+    }
+
 }

@@ -14,6 +14,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder(toBuilder = true)
 public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,5 +39,16 @@ public class Book implements Serializable {
         this.name = name;
         this.publishDate = publishDate;
         this.authorName = authorName;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", publishDate=" + publishDate +
+                ", authorName='" + authorName + '\'' +
+                ", notes=" + notes +
+                '}';
     }
 }
