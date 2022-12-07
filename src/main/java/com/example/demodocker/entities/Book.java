@@ -51,4 +51,6 @@ public class Book implements Serializable {
                 ", notes=" + notes +
                 '}';
     }
+
+    //demo jenkins
 }
