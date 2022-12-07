@@ -1,34 +1,30 @@
 package com.example.demodocker.entities;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-@Data
+@Table
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Note {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "created_ts")
-    private Long createdTs;
-
-    @Column(name = "updated_ts")
-    private Long updatedTs;
-
     @Column(name = "note_content")
     @Type(type = "text")
     private String content;
 
-    @Column(name = "note_title")
-    @Type(type = "text")
-    private String title;
-//aha
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id")
+    @JsonBackReference
+    private Book book;
+
 }
