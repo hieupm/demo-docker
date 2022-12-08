@@ -3,6 +3,9 @@ pipeline {
     tools {
         maven 'maven'
     }
+    environment {
+            PATH = "$PATH:/usr/local/bin"
+        }
     stages {
         stage('Build') {
             steps {
