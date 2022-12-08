@@ -16,26 +16,22 @@ services:
       - postgres
     restart: unless-stopped
 
-  pgadmin:
-    container_name: pgadmin_container
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    volumes:
-      - pgadmin:/var/lib/pgadmin
-
-    ports:
-      - "8080:8080"
-    networks:
+  app:
+    links:
+      - 'postgres'
+    build: .
+    depends_on:
       - postgres
-    restart: unless-stopped
-
-networks:
-  postgres:
-    driver: bridge
+    restart: always
+    ports:
+      - "8080:8080" #<local-port>:<container-port>
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/demo?autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
+    stdin_open: true
+    tty: true
 
 volumes:
   postgres:
-  pgadmin:
+  app:
