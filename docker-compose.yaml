@@ -1,32 +1,37 @@
-version: "3.8"
+version: "2.2"
 
 services:
-  mysqldb:
-    image: mysql:8.0.30
-    restart: unless-stopped
+  postgres:
+    container_name: postgres_container
+    image: postgres
     environment:
-      - MYSQL_ROOT_PASSWORD=1234
-      - MYSQL_DATABASE=demo
-    ports:
-      - "3307:3306" #<local-port>:<container-port>
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-1234}
+      PGDATA: /data/postgres
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/1.sql
-      - db:/var/lib/mysql
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+
   app:
+
     links:
-      - 'mysqldb'
+      - 'postgres'
     build: .
     depends_on:
-      - mysqldb
+      - postgres
     restart: always
+
     ports:
-      - "8080:8080" #<local-port>:<container-port>
+      - "8081:8080" #<local-port>:<container-port>
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/demo?autoReconnect=true&failOverReadOnly=false&maxReconnects=10
-      SPRING_DATASOURCE_USERNAME: root
+
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/demo?autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+      SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 1234
     stdin_open: true
     tty: true
 
 volumes:
-  db:
+  postgres:
+  pgadmin:
