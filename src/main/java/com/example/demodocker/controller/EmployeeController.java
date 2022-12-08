@@ -1,7 +1,6 @@
 package com.example.demodocker.controller;
 
 import com.example.demodocker.entities.Employee;
-import com.example.demodocker.entities.Item;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.http.HttpHeaders;
