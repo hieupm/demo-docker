@@ -1,32 +1,41 @@
-version: "3.8"
+version: "15.1"
 
 services:
-  mysqldb:
-    image: mysql:8.0.30
-    restart: unless-stopped
+  postgres:
+    container_name: postgres_container
+    image: postgres
     environment:
-      - MYSQL_ROOT_PASSWORD=1234
-      - MYSQL_DATABASE=demo
-    ports:
-      - "3307:3306" #<local-port>:<container-port>
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-1234}
+      PGDATA: /data/postgres
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/1.sql
-      - db:/var/lib/mysql
-  app:
-    links:
-      - 'mysqldb'
-    build: .
-    depends_on:
-      - mysqldb
-    restart: always
+      - postgres:/data/postgres
     ports:
-      - "8080:8080" #<local-port>:<container-port>
+      - "5433:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/demo?autoReconnect=true&failOverReadOnly=false&maxReconnects=10
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 1234
-    stdin_open: true
-    tty: true
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
 
 volumes:
-  db:
+  postgres:
+  pgadmin:
