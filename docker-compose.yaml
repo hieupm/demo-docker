@@ -8,6 +8,9 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-1234}
       PGDATA: /data/postgres
+      POSTGRES_DB: demo
+    expose:
+      - 5432
     volumes:
       - postgres:/data/postgres
     ports:
