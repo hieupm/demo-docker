@@ -28,7 +28,7 @@ services:
     ports:
       - "8081:8080" #<local-port>:<container-port>
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://0.0.0.0:5432/demo?autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/demo?autoReconnect=true&failOverReadOnly=false&maxReconnects=10
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 1234
     stdin_open: true
