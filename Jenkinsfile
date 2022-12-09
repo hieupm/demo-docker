@@ -9,8 +9,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose'
-                sh 'docker-compose up -d –build'
+                sh 'sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose'
+                sh 'sudo docker-compose up -d –build'
                 sh 'mvn clean package'
             }
         }
