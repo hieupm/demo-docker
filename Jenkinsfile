@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Install packages') {
             steps {
-                sh("docker run --user='hieupm' --rm -v `pwd`:/app -w /app node yarn install")
+                sh("apt install docker.io")
               }
         }
         stage('Build') {
