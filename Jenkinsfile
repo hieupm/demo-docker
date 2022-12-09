@@ -7,6 +7,9 @@ pipeline {
             PATH = "$PATH:/usr/local/bin"
         }
     stages {
+        stage('Install packages') {
+          sh("docker run --user='jenkins' --rm -v `pwd`:/app -w /app node yarn install")
+        }
         stage('Build') {
             steps {
                 sh 'sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose'
