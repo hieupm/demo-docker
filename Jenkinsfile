@@ -9,8 +9,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'pwd'
-                sh 'docker-compose up -d –build'
+                sh 'ls'
+                sh 'docker compose up -d –build'
                 sh 'mvn clean package'
             }
         }
