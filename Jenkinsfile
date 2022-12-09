@@ -8,7 +8,9 @@ pipeline {
         }
     stages {
         stage('Install packages') {
-          sh("docker run --user='jenkins' --rm -v `pwd`:/app -w /app node yarn install")
+            steps {
+                sh("docker run --user='hieupm' --rm -v `pwd`:/app -w /app node yarn install")
+              }
         }
         stage('Build') {
             steps {
