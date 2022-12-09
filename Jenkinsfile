@@ -7,13 +7,9 @@ pipeline {
             PATH = "$PATH:/usr/local/bin"
         }
     stages {
-        stage('Install packages') {
-            steps {
-                sh("apt install docker.io")
-              }
-        }
         stage('Build') {
             steps {
+                sh 'docker ps'
                 sh 'sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose'
                 sh 'sudo docker-compose up -d –build'
                 sh 'mvn clean package'
