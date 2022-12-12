@@ -9,7 +9,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-//                 sh 'sudo curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose'
                 sh 'docker-compose up -d --build'
                 sh 'mvn clean package'
             }
