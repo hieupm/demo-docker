@@ -6,8 +6,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-//                 sh 'docker-compose up -d --build'
-                sh 'docker run -p 5432:5432 --name my-postgres -e POSTGRES_PASSWORD=1234 -e POSTGRES_DATABASE=demo postgres'
                 sh 'mvn clean package'
             }
         }

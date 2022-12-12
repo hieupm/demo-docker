@@ -6,15 +6,15 @@ services:
     image: postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-1234}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       PGDATA: /data/postgres
-      POSTGRES_DB: demo
+      POSTGRES_DB: loyalty
     expose:
-      - 5432
+      - 5433
     volumes:
       - postgres:/data/postgres
     ports:
-      - "5433:5432"
+      - "5433:5433"
 
   app:
 
@@ -28,9 +28,9 @@ services:
     ports:
       - "8081:8080" #<local-port>:<container-port>
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/demo?autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5433/loyalty?autoReconnect=true&failOverReadOnly=false&maxReconnects=10
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_DATASOURCE_PASSWORD: postgres
     stdin_open: true
     tty: true
 
