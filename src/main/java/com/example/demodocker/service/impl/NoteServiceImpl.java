@@ -29,4 +29,9 @@ public class NoteServiceImpl implements NoteService {
     public Note getNoteByBookId(String id) {
         return noteRepository.getNoteByBookId(id);
     }
+
+    @Override
+    public void delete(Long id) {
+        noteRepository.deleteById(id);
+    }
 }

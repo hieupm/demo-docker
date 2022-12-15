@@ -11,4 +11,6 @@ public interface NoteService {
 
     Note getNoteByBookId(String id);
 
+    void delete(Long id);
+
 }
