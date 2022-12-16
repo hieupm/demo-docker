@@ -27,4 +27,16 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .jwt()
                 .jwtAuthenticationConverter(jwtAuthenticationConverter);
     }
+
+    @Override
+    public void configure(org.springframework.security.config.annotation.web.builders.WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/v2/api-docs",
+                "/swagger-ui.html",
+                "/webjars/**",
+                "/swagger-ui/index.html",
+                "/swagger-ui/**",
+                "/v3/api-docs/**");
+    }
+
+
 }

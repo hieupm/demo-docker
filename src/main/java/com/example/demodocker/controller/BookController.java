@@ -3,6 +3,7 @@ package com.example.demodocker.controller;
 import com.example.demodocker.entities.Book;
 import com.example.demodocker.service.BookService;
 import com.example.demodocker.service.CrudCommonService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/book")
 @Slf4j
+@SecurityRequirement(name = "bearerAuth")
 public class BookController {
 
     private CrudCommonService crudCommonService;

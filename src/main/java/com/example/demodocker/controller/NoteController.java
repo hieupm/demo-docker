@@ -3,6 +3,7 @@ package com.example.demodocker.controller;
 import com.example.demodocker.entities.Note;
 import com.example.demodocker.repo.NoteRepository;
 import com.example.demodocker.service.NoteService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/note")
 @Slf4j
+@SecurityRequirement(name = "bearerAuth")
 public class NoteController {
 
     @Autowired
