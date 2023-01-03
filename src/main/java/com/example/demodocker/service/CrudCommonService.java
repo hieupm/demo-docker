@@ -8,4 +8,8 @@ public interface CrudCommonService {
     List<Object> getAll();
 
     void delete(Long id);
+
+    default void update(){
+        System.out.println("First");
+    };
 }
