@@ -27,4 +27,8 @@ public class Category {
     @JsonManagedReference
     private List<Product> products;
 
+    public Category(String name, List<Product> products) {
+        this.name = name;
+        this.products = products;
+    }
 }
