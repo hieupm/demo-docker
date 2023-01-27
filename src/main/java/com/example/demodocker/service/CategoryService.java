@@ -11,4 +11,5 @@ public interface CategoryService {
     
     void delete(Long id);
 
+    String checkUnique(Long id, String name);
 }

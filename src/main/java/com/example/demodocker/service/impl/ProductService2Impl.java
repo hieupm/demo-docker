@@ -3,6 +3,7 @@ package com.example.demodocker.service.impl;
 import com.example.demodocker.entities.Product;
 import com.example.demodocker.repo.ProductRepository;
 import com.example.demodocker.service.CrudCommonService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
@@ -16,11 +17,10 @@ import java.util.List;
 @Transactional
 @Qualifier("product")
 @Primary
+@RequiredArgsConstructor
 public class ProductService2Impl implements CrudCommonService {
 
-    @Autowired
-    private ProductRepository productRepository;
-
+    private final ProductRepository productRepository;
 
     @Override
     public void save(Object object) {

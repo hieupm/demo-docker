@@ -16,7 +16,7 @@
     <properties>
         <java.version>11</java.version>
         <spring-cloud.version>Hoxton.SR7</spring-cloud.version>
-        <junit-jupiter.version>5.3.2</junit-jupiter.version>
+        <junit-jupiter.version>5.5.2</junit-jupiter.version>
     </properties>
     <dependencies>
         <dependency>

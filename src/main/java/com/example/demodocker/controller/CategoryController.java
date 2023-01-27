@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,6 +24,14 @@ import java.util.Scanner;
 public class CategoryController {
 
     private final CategoryService categoryService;
+
+    @Value("${spring.message}")
+    private String message;
+
+    @GetMapping("/env")
+    public String envInfo(){
+        return message;
+    }
 
     @PreAuthorize("hasRole('test1')")
 //    @Secured("ROLE_developer")

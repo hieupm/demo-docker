@@ -3,6 +3,7 @@ package com.example.demodocker.controller;
 import com.example.demodocker.entities.Product;
 import com.example.demodocker.service.CrudCommonService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,15 +14,11 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/product")
 @Slf4j
+@RequiredArgsConstructor
 @SecurityRequirement(name = "bearerAuth")
 public class ProductController {
 
-    private CrudCommonService crudCommonService;
-
-    @Autowired
-    public ProductController(CrudCommonService crudCommonService) {
-        this.crudCommonService = crudCommonService;
-    }
+    private final CrudCommonService crudCommonService;
 
     @GetMapping
     public ResponseEntity<List<Object>> getProducts() {
