@@ -1,7 +1,9 @@
 package com.example.demodocker.controller;
 
+import com.example.demodocker.config.Tracing;
 import com.example.demodocker.entities.Category;
 import com.example.demodocker.service.CategoryService;
+import io.opentracing.Span;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,11 +39,14 @@ public class CategoryController {
 //    @Secured("ROLE_developer")
     @GetMapping
     public ResponseEntity<List<Category>> getCategories() {
+        Span span = Tracing.tracer.buildSpan("my-operation").start();
         try{
             return ResponseEntity.ok(categoryService.listAll());
         } catch (Exception e){
             log.info("Error while querying category list: " + e);
             return null;
+        } finally {
+            span.finish();
         }
     }
 

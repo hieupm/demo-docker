@@ -18,13 +18,18 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public void insert(Product product) {
+    public void save(Product product) {
         productRepository.save(product);
     }
 
     @Override
     public List<Product> listAll() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public void delete(Long id) {
+        productRepository.deleteById(id);
     }
 
 }
