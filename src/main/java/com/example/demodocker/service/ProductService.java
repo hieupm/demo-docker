@@ -5,8 +5,9 @@ import com.example.demodocker.entities.Product;
 import java.util.List;
 
 public interface ProductService {
-    void insert(Product product);
+    void save(Product product);
 
-    List<Product> listAll();
+    List<Product> getAll();
 
+    void delete(Long id);
 }

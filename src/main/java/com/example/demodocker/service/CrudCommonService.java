@@ -9,7 +9,4 @@ public interface CrudCommonService {
 
     void delete(Long id);
 
-    default void update(){
-        System.out.println("First");
-    };
 }

@@ -37,8 +37,4 @@ public class ProductService2Impl implements CrudCommonService {
         productRepository.deleteById(id);
     }
 
-    @Override
-    public void update() {
-        System.out.println("Second");
-    }
 }
